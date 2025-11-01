@@ -1,38 +1,38 @@
 # Frontend Setup Guide
 
-## Quick Start
+ Quick Start
 
-### 1. Install Dependencies
+ 1. Install Dependencies
 
-```bash
+bash
 npm install
-```
 
-### 2. Configure Environment
+
+ 2. Configure Environment
 
 Copy the example environment file:
 
-```bash
+bash
 cp .env.local .env.local
-```
+
 
 The default configuration connects to the local FastAPI backend:
-```env
+env
 VITE_API_URL=http://localhost:8000/api/v1
 VITE_APP_NAME=E-commerce Store
-```
 
-### 3. Start Development Server
 
-```bash
+ 3. Start Development Server
+
+bash
 npm run dev
-```
+
 
 Open http://localhost:5173 in your browser.
 
-## Project Structure Overview
+ Project Structure Overview
 
-### `/src/api/` - API Integration
+ `/src/api/` - API Integration
 - `axiosClient.ts` - Configured Axios with JWT interceptors
 - `auth.ts` - Authentication API methods
 - `products.ts` - Product CRUD operations
@@ -40,14 +40,14 @@ Open http://localhost:5173 in your browser.
 - `orders.ts` - Order management
 - `payments.ts` - Payment integration
 
-### `/src/components/` - Reusable Components
+ `/src/components/` - Reusable Components
 - `Navbar.tsx` - Top navigation with cart and auth
 - `Footer.tsx` - Global footer
 - `ProductCard.tsx` - Product display card
 - `ProtectedRoute.tsx` - Route protection for auth/admin
 - `Loader.tsx` - Loading spinner
 
-### `/src/pages/` - Page Components
+ `/src/pages/` - Page Components
 - `Home.tsx` - Product listing with filters
 - `Login.tsx` & `Register.tsx` - Auth pages
 - `Cart.tsx` - Shopping cart view
@@ -56,57 +56,57 @@ Open http://localhost:5173 in your browser.
 - `admin/Dashboard.tsx` - Admin home
 - `admin/ManageProducts.tsx` - Product management
 
-### `/src/hooks/` - Custom Hooks
+ `/src/hooks/` - Custom Hooks
 - `useAuth()` - Authentication logic
 - `useProducts()` - Product queries with React Query
 - `useCart()` - Cart mutations
 - `useOrders()` - Order queries
 
-### `/src/stores/` - State Management
+ `/src/stores/` - State Management
 - `authStore.ts` - Auth state with Zustand
 - `cartStore.ts` - Cart state with Zustand
 
-### `/src/utils/` - Helpers
+ `/src/utils/` - Helpers
 - `constants.ts` - Routes and constants
 - `helpers.ts` - Utility functions
 
-## Key Features Implemented
+ Key Features Implemented
 
-### Authentication
-✅ User registration and login
-✅ JWT token management
-✅ Persistent sessions with localStorage
-✅ Protected routes
-✅ Auto-logout on 401
+ Authentication
+ User registration and login
+ JWT token management
+ Persistent sessions with localStorage
+ Protected routes
+ Auto-logout on 401
 
-### Product Management
-✅ Product listing with search
-✅ Category filtering
-✅ Price range filtering
-✅ Product details
-✅ Admin CRUD operations
+ Product Management
+ Product listing with search
+ Category filtering
+ Price range filtering
+ Product details
+ Admin CRUD operations
 
-### Shopping Cart
-✅ Add/remove items
-✅ Update quantities
-✅ Real-time totals
-✅ 7-day cart persistence (via backend)
+ Shopping Cart
+ Add/remove items
+ Update quantities
+ Real-time totals
+ 7-day cart persistence (via backend)
 
-### Checkout & Orders
-✅ Order creation from cart
-✅ Order history viewing
-✅ Order status tracking
-✅ Payment intent creation (Stripe-ready)
+ Checkout & Orders
+ Order creation from cart
+ Order history viewing
+ Order status tracking
+ Payment intent creation (Stripe-ready)
 
-### Admin Dashboard
-✅ Protected admin routes
-✅ Product management (CRUD)
-✅ Category management
-✅ Product search and pagination
+ Admin Dashboard
+ Protected admin routes
+ Product management (CRUD)
+ Category management
+ Product search and pagination
 
-## Development Commands
+ Development Commands
 
-```bash
+bash
 # Start dev server
 npm run dev
 
@@ -121,13 +121,13 @@ npm run type-check
 
 # Linting
 npm run lint
-```
 
-## API Integration Examples
 
-### Fetching Products
+ API Integration Examples
 
-```typescript
+ Fetching Products
+
+typescript
 import { useProducts } from './hooks/useProducts';
 
 function ProductList() {
@@ -142,11 +142,11 @@ function ProductList() {
 
   return products?.data.map(p => <ProductCard product={p} />);
 }
-```
 
-### Adding to Cart
 
-```typescript
+ Adding to Cart
+
+typescript
 import { useCart } from './hooks/useCart';
 
 function ProductCard({ product }) {
@@ -161,11 +161,11 @@ function ProductCard({ product }) {
     </button>
   );
 }
-```
 
-### User Authentication
 
-```typescript
+ User Authentication
+
+typescript
 import { useAuth } from './hooks/useAuth';
 
 function LoginForm() {
@@ -185,13 +185,13 @@ function LoginForm() {
     </form>
   );
 }
-```
 
-## Styling with Tailwind CSS
+
+ Styling with Tailwind CSS
 
 All components use Tailwind CSS classes. Common utilities:
 
-```tsx
+tsx
 // Colors
 className="text-blue-600 bg-gray-100 hover:bg-gray-200"
 
@@ -203,7 +203,7 @@ className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4"
 
 // Utilities
 className="rounded-lg shadow-sm border border-gray-200"
-```
+
 
 Custom utility classes are defined in `/src/styles/index.css`:
 - `.btn-primary` - Primary button
@@ -211,11 +211,11 @@ Custom utility classes are defined in `/src/styles/index.css`:
 - `.input-field` - Form input
 - `.card` - Card component
 
-## Error Handling & Toast Notifications
+ Error Handling & Toast Notifications
 
 Errors are displayed via React Hot Toast:
 
-```typescript
+typescript
 import toast from 'react-hot-toast';
 
 try {
@@ -224,109 +224,109 @@ try {
 } catch (error) {
   toast.error(error.response?.data?.detail || 'Login failed');
 }
-```
+
 
 Toast appears in top-right corner automatically.
 
-## Performance Optimizations
+ Performance Optimizations
 
-1. **React Query Caching** - API responses cached and reused
-2. **Code Splitting** - Automatic route-based splitting with React Router
-3. **Image Optimization** - Lazy loading ready (add `loading="lazy"` to img tags)
-4. **Type Safety** - Full TypeScript support prevents runtime errors
-5. **Minification** - Vite minifies all code in production builds
+1. React Query Caching - API responses cached and reused
+2. Code Splitting - Automatic route-based splitting with React Router
+3. Image Optimization - Lazy loading ready (add `loading="lazy"` to img tags)
+4. Type Safety - Full TypeScript support prevents runtime errors
+5. Minification - Vite minifies all code in production builds
 
-## Testing the Full Flow
+ Testing the Full Flow
 
-1. **Register**: Visit `/register` and create an account
-2. **Login**: Visit `/login` with your credentials
-3. **Browse**: Homepage shows products with filters
-4. **Add to Cart**: Click shopping cart icon on any product
-5. **View Cart**: Navigate to `/cart` to see items
-6. **Checkout**: Proceed to `/checkout` to create order
-7. **Orders**: View order history at `/orders`
-8. **Admin**: If admin user, access `/admin/dashboard`
+1. Register: Visit `/register` and create an account
+2. Login: Visit `/login` with your credentials
+3. Browse: Homepage shows products with filters
+4. Add to Cart: Click shopping cart icon on any product
+5. View Cart: Navigate to `/cart` to see items
+6. Checkout: Proceed to `/checkout` to create order
+7. Orders: View order history at `/orders`
+8. Admin: If admin user, access `/admin/dashboard`
 
-## Deployment
+ Deployment
 
-### Build for Production
+ Build for Production
 
-```bash
+bash
 npm run build
-```
+
 
 Output files are in `/dist/` directory.
 
-### Deploy to Vercel
+ Deploy to Vercel
 
-```bash
+bash
 vercel deploy --prod
-```
 
-### Deploy to Netlify
 
-```bash
+ Deploy to Netlify
+
+bash
 npm run build
 # Upload the 'dist' folder to Netlify
-```
 
-### Docker Deployment
 
-```bash
+ Docker Deployment
+
+bash
 docker build -f Dockerfile.frontend -t ecommerce-frontend .
 docker run -p 80:80 ecommerce-frontend
-```
 
-## Environment Variables
+
+ Environment Variables
 
 Create `.env.local` with:
 
-```env
+env
 # Backend API URL
 VITE_API_URL=http://localhost:8000/api/v1
 
 # Application name (shown in browser title, etc.)
 VITE_APP_NAME=E-commerce Store
-```
+
 
 For production, update the API URL to your deployed backend.
 
-## Troubleshooting
+ Troubleshooting
 
-### "Cannot find module" errors
-```bash
+ "Cannot find module" errors
+bash
 # Clear node_modules and reinstall
 rm -rf node_modules package-lock.json
 npm install
-```
 
-### CORS errors
+
+ CORS errors
 - Ensure backend CORS is configured for your frontend origin
 - Check `VITE_API_URL` is correct
 - Check browser console for actual error
 
-### Blank page
+ Blank page
 - Check browser console for errors (F12)
 - Verify backend is running: `curl http://localhost:8000/health`
 - Check network tab to see if API calls are working
 
-### Token not persisting
+ Token not persisting
 - Check browser localStorage (F12 → Application → Storage)
 - Verify backend JWT settings are correct
 - Try logging out and back in
 
-## Browser DevTools
+ Browser DevTools
 
-### React Developer Tools
+ React Developer Tools
 Install browser extension to inspect React components in DevTools.
 
-### Network Tab
+ Network Tab
 Monitor API calls to debug integration issues.
 
-### Local Storage
+ Local Storage
 View stored tokens and user data.
 
-## Next Steps
+ Next Steps
 
 1. Connect real Stripe payments for checkout
 2. Add image uploads for products
@@ -337,7 +337,7 @@ View stored tokens and user data.
 7. Create customer support chat
 8. Add analytics tracking
 
-## Support & Documentation
+ Support & Documentation
 
 - React: https://react.dev
 - Vite: https://vitejs.dev

@@ -2,33 +2,33 @@
 
 A production-ready React + Vite e-commerce frontend with TypeScript, Tailwind CSS, and integrated API client for the FastAPI backend.
 
-## Features
+ Features
 
-- **User Authentication** - Register, login, and persistent JWT-based sessions
-- **Product Browsing** - List, search, filter, and view product details
-- **Shopping Cart** - Add/remove items, update quantities with real-time totals
-- **Checkout Flow** - Complete order creation and payment integration ready
-- **Order Management** - View order history and status
-- **Admin Dashboard** - Protected admin routes for product and category management
-- **Responsive Design** - Mobile-first approach with Tailwind CSS
-- **Error Handling** - Toast notifications for user feedback
-- **State Management** - Zustand for auth/cart state with React Query for API calls
+- User Authentication - Register, login, and persistent JWT-based sessions
+- Product Browsing - List, search, filter, and view product details
+- Shopping Cart - Add/remove items, update quantities with real-time totals
+- Checkout Flow - Complete order creation and payment integration ready
+- Order Management - View order history and status
+- Admin Dashboard - Protected admin routes for product and category management
+- Responsive Design - Mobile-first approach with Tailwind CSS
+- Error Handling - Toast notifications for user feedback
+- State Management - Zustand for auth/cart state with React Query for API calls
 
-## Tech Stack
+ Tech Stack
 
-- **Framework:** React 18 with Vite
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **State Management:** Zustand + React Query
-- **Forms:** React Hook Form + Zod validation
-- **HTTP Client:** Axios
-- **Icons:** Lucide React
-- **Notifications:** React Hot Toast
-- **Routing:** React Router v6
+- Framework: React 18 with Vite
+- Language: TypeScript
+- Styling: Tailwind CSS
+- State Management: Zustand + React Query
+- Forms: React Hook Form + Zod validation
+- HTTP Client: Axios
+- Icons: Lucide React
+- Notifications: React Hot Toast
+- Routing: React Router v6
 
-## Project Structure
+ Project Structure
 
-```
+
 src/
 ├── api/                      # API integration layer
 │   ├── axiosClient.ts       # Axios instance with interceptors
@@ -68,73 +68,73 @@ src/
 │   └── helpers.ts          # Utility functions
 ├── App.tsx                 # Main app component with routing
 └── main.tsx                # React entry point
-```
 
-## Getting Started
 
-### Prerequisites
+ Getting Started
+
+ Prerequisites
 
 - Node.js 16+ and npm/yarn
 - Running FastAPI backend at `http://localhost:8000/api/v1`
 
-### Installation
+ Installation
 
-1. **Install dependencies**
+1. Install dependencies
 
-```bash
+bash
 npm install
-```
 
-2. **Create environment file**
 
-```bash
+2. Create environment file
+
+bash
 cp .env.example .env.local
-```
 
-3. **Configure API URL**
+
+3. Configure API URL
 
 Edit `.env.local`:
-```env
+env
 VITE_API_URL=http://localhost:8000/api/v1
 VITE_APP_NAME=E-commerce Store
-```
 
-### Development
+
+ Development
 
 Start the development server:
 
-```bash
+bash
 npm run dev
-```
+
 
 The app will open at `http://localhost:5173`
 
-### Production Build
+ Production Build
 
-```bash
+bash
 npm run build
-```
+
 
 Output will be in the `dist/` directory.
 
-### Preview Production Build
+ Preview Production Build
 
-```bash
+bash
 npm run preview
-```
 
-## API Integration
 
-### Axios Client
+ API Integration
+
+ Axios Client
 
 The `axiosClient` automatically:
 - Adds JWT token from localStorage to all requests
 - Handles 401 errors by redirecting to login
 - Supports request/response interceptors
 
-### Usage Example
+ Usage Example
 
-```typescript
+typescript
 import { useProducts } from './hooks/useProducts';
 
 function MyComponent() {
@@ -149,87 +149,87 @@ function MyComponent() {
     </div>
   );
 }
-```
 
-## Authentication Flow
 
-1. **Register** → User creates account
-2. **Login** → Returns access & refresh tokens
-3. **Token Storage** → Stored in localStorage
-4. **Auto-attach** → Axios adds token to all requests
-5. **Session Management** → Token persisted across page reloads
-6. **Logout** → Clears tokens and redirects to home
+ Authentication Flow
 
-## State Management
+1. Register → User creates account
+2. Login → Returns access & refresh tokens
+3. Token Storage → Stored in localStorage
+4. Auto-attach → Axios adds token to all requests
+5. Session Management → Token persisted across page reloads
+6. Logout → Clears tokens and redirects to home
 
-### Auth Store (Zustand)
+ State Management
 
-```typescript
+ Auth Store (Zustand)
+
+typescript
 const { user, isAuthenticated, login, logout } = useAuthStore();
-```
 
-### Cart Store (Zustand)
 
-```typescript
+ Cart Store (Zustand)
+
+typescript
 const { cart, addItem, removeItem, updateItem } = useCartStore();
-```
 
-### API Data (React Query)
 
-```typescript
+ API Data (React Query)
+
+typescript
 const { data, isLoading, error } = useProducts();
-```
 
-## Pages Overview
 
-### Public Pages
-- **Home** (`/`) - Product listing with search and filters
-- **Login** (`/login`) - User authentication
-- **Register** (`/register`) - New user registration
+ Pages Overview
 
-### Protected Pages
-- **Cart** (`/cart`) - Shopping cart with item management
-- **Checkout** (`/checkout`) - Order summary and payment
-- **Orders** (`/orders`) - User's order history
+ Public Pages
+- Home (`/`) - Product listing with search and filters
+- Login (`/login`) - User authentication
+- Register (`/register`) - New user registration
 
-### Admin Pages
-- **Dashboard** (`/admin/dashboard`) - Admin home
-- **Products** (`/admin/products`) - CRUD for products
+ Protected Pages
+- Cart (`/cart`) - Shopping cart with item management
+- Checkout (`/checkout`) - Order summary and payment
+- Orders (`/orders`) - User's order history
 
-## Component Examples
+ Admin Pages
+- Dashboard (`/admin/dashboard`) - Admin home
+- Products (`/admin/products`) - CRUD for products
 
-### Using Protected Routes
+ Component Examples
 
-```typescript
+ Using Protected Routes
+
+typescript
 <ProtectedRoute adminOnly>
   <AdminDashboard />
 </ProtectedRoute>
-```
 
-### Using Hooks
 
-```typescript
+ Using Hooks
+
+typescript
 const { register, handleSubmit } = useForm<FormData>();
 const { addItem, isUpdating } = useCart();
 
 const onSubmit = async (data) => {
   addItem({ product_id: 1, quantity: 1 });
 };
-```
 
-### Styling with Tailwind
 
-```tsx
+ Styling with Tailwind
+
+tsx
 <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
   Click me
 </button>
-```
 
-## Error Handling
+
+ Error Handling
 
 Errors are displayed via toast notifications:
 
-```typescript
+typescript
 import toast from 'react-hot-toast';
 
 try {
@@ -237,53 +237,53 @@ try {
 } catch (error) {
   toast.error('Login failed');
 }
-```
 
-## Deployment
 
-### Vercel (Recommended)
+ Deployment
+
+ Vercel (Recommended)
 
 1. Push code to GitHub
 2. Import project in Vercel
 3. Add environment variables
 4. Deploy
 
-### Netlify
+ Netlify
 
-```bash
+bash
 npm run build
-```
+
 
 Deploy the `dist/` folder.
 
-### Docker
+ Docker
 
-```bash
+bash
 docker build -f Dockerfile.frontend -t ecommerce-frontend .
 docker run -p 80:80 ecommerce-frontend
-```
 
-## Environment Variables
+
+ Environment Variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `VITE_API_URL` | Backend API base URL | `http://localhost:8000/api/v1` |
 | `VITE_APP_NAME` | Application name | `E-commerce Store` |
 
-## Performance Tips
+ Performance Tips
 
-1. **Code Splitting** - React Router provides automatic route-based splitting
-2. **Lazy Loading** - Use React.lazy() for admin routes
-3. **Image Optimization** - Use responsive images with proper formats
-4. **Caching** - React Query caches API responses
-5. **Minification** - Vite automatically minifies production builds
+1. Code Splitting - React Router provides automatic route-based splitting
+2. Lazy Loading - Use React.lazy() for admin routes
+3. Image Optimization - Use responsive images with proper formats
+4. Caching - React Query caches API responses
+5. Minification - Vite automatically minifies production builds
 
-## Troubleshooting
+ Troubleshooting
 
-### CORS Errors
+ CORS Errors
 
 Ensure backend allows frontend origin:
-```python
+python
 # In FastAPI backend
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -294,38 +294,38 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-```
 
-### Token Expired
+
+ Token Expired
 
 Tokens are automatically handled by the API client. If issues persist:
 1. Clear browser localStorage
 2. Log out and log back in
 3. Check backend token expiration settings
 
-### API Not Responding
+ API Not Responding
 
 1. Check if backend is running: `http://localhost:8000/health`
 2. Verify `VITE_API_URL` in `.env.local`
 3. Check browser console for CORS/network errors
 
-## Browser Support
+ Browser Support
 
 - Chrome/Edge: Latest 2 versions
 - Firefox: Latest 2 versions
 - Safari: Latest 2 versions
 
-## Contributing
+ Contributing
 
 1. Create feature branch: `git checkout -b feature/amazing-feature`
 2. Commit changes: `git commit -m 'Add amazing feature'`
 3. Push: `git push origin feature/amazing-feature`
 4. Create Pull Request
 
-## License
+ License
 
 MIT License - see LICENSE file for details
 
-## Support
+ Support
 
 For issues and questions, please open an issue on GitHub.

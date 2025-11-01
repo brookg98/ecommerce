@@ -1,30 +1,30 @@
 # E-commerce Backend API
 
-A production-ready, modular e-commerce backend built with **FastAPI**, **PostgreSQL**, **Redis**, and **Stripe** payment integration. This project follows clean architecture principles and implements modern async/await patterns throughout.
+A production-ready, modular e-commerce backend built with FastAPI, PostgreSQL, Redis, and Stripe payment integration. This project follows clean architecture principles and implements modern async/await patterns throughout.
 
-## Features
+ Features
 
-- **Authentication Service** - JWT-based user registration, login, and token refresh
-- **Product Service** - Full CRUD operations for products and categories with filtering and search
-- **Cart Service** - Redis-powered shopping cart with real-time inventory checks
-- **Order Service** - Complete order management with automatic stock updates
-- **Payment Service** - Stripe payment integration with webhook support
-- **Admin Panel** - Protected admin routes for product and category management
+- Authentication Service - JWT-based user registration, login, and token refresh
+- Product Service - Full CRUD operations for products and categories with filtering and search
+- Cart Service - Redis-powered shopping cart with real-time inventory checks
+- Order Service - Complete order management with automatic stock updates
+- Payment Service - Stripe payment integration with webhook support
+- Admin Panel - Protected admin routes for product and category management
 
-## Tech Stack
+ Tech Stack
 
-- **Backend Framework:** FastAPI (Python 3.11+)
-- **Database:** PostgreSQL with SQLAlchemy (async)
-- **Cache:** Redis (for cart and sessions)
-- **Message Queue:** Celery with Redis broker
-- **Authentication:** JWT with PyJWT
-- **Payments:** Stripe API
-- **Testing:** Pytest with async support
-- **Containerization:** Docker & Docker Compose
-- **Migrations:** Alembic
-- **Docs:** Auto-generated Swagger UI at `/docs`
+- Backend Framework: FastAPI (Python 3.11+)
+- Database: PostgreSQL with SQLAlchemy (async)
+- Cache: Redis (for cart and sessions)
+- Message Queue: Celery with Redis broker
+- Authentication: JWT with PyJWT
+- Payments: Stripe API
+- Testing: Pytest with async support
+- Containerization: Docker & Docker Compose
+- Migrations: Alembic
+- Docs: Auto-generated Swagger UI at `/docs`
 
-## Project Structure
+ Project Structure
 
 ```
 ecommerce-backend/
@@ -68,25 +68,25 @@ ecommerce-backend/
 └── README.md
 ```
 
-## Quick Start
+ Quick Start
 
-### Prerequisites
+# Prerequisites
 
 - Docker and Docker Compose
 - Python 3.11+ (for local development)
 - PostgreSQL 15+ (if not using Docker)
 - Redis 7+ (if not using Docker)
 
-### Using Docker Compose (Recommended)
+# Using Docker Compose (Recommended)
 
-1. **Clone the repository**
+1. Clone the repository
 
 ```bash
 git clone <repository-url>
 cd ecommerce-backend
 ```
 
-2. **Create environment file**
+2. Create environment file
 
 ```bash
 cp .env.example .env
@@ -94,42 +94,42 @@ cp .env.example .env
 
 Edit `.env` with your configuration (optional for local development).
 
-3. **Start all services**
+3. Start all services
 
 ```bash
 docker-compose up --build
 ```
 
 This will start:
-- **API** at http://localhost:8000
-- **PostgreSQL** at localhost:5432
-- **Redis** at localhost:6379
-- **Adminer** (DB viewer) at http://localhost:8080
+- API at http://localhost:8000
+- PostgreSQL at localhost:5432
+- Redis at localhost:6379
+- Adminer (DB viewer) at http://localhost:8080
 
-4. **Run database migrations**
+4. Run database migrations
 
 ```bash
 docker-compose exec api alembic upgrade head
 ```
 
-5. **Access the API documentation**
+5. Access the API documentation
 
 - Swagger UI: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
 
-### Local Development (Without Docker)
+# Local Development (Without Docker)
 
-1. **Install dependencies**
+1. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-2. **Set up PostgreSQL and Redis**
+2. Set up PostgreSQL and Redis
 
 Ensure PostgreSQL and Redis are running locally.
 
-3. **Configure environment variables**
+3. Configure environment variables
 
 ```bash
 cp .env.example .env
@@ -144,21 +144,21 @@ JWT_SECRET=your-secret-key
 STRIPE_API_KEY=sk_test_your_key
 ```
 
-4. **Run migrations**
+4. Run migrations
 
 ```bash
 alembic upgrade head
 ```
 
-5. **Start the API**
+5. Start the API
 
 ```bash
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-## API Endpoints
+ API Endpoints
 
-### Health Check
+# Health Check
 
 ```
 GET /health
@@ -169,7 +169,7 @@ GET /api/v1/orders/health
 GET /api/v1/payments/health
 ```
 
-### Authentication
+# Authentication
 
 ```
 POST   /api/v1/auth/register      # Register new user
@@ -178,7 +178,7 @@ POST   /api/v1/auth/refresh       # Refresh access token
 GET    /api/v1/auth/me            # Get current user info
 ```
 
-### Products
+# Products
 
 ```
 GET    /api/v1/products                    # List products (with filters)
@@ -190,7 +190,7 @@ GET    /api/v1/products/categories/list    # List categories
 POST   /api/v1/products/categories         # Create category (admin)
 ```
 
-**Query Parameters for List Products:**
+Query Parameters for List Products:
 - `skip`: Pagination offset (default: 0)
 - `limit`: Results per page (default: 100, max: 100)
 - `category_id`: Filter by category
@@ -198,7 +198,7 @@ POST   /api/v1/products/categories         # Create category (admin)
 - `max_price`: Maximum price filter
 - `search`: Search in name and description
 
-### Cart
+# Cart
 
 ```
 GET    /api/v1/cart              # Get current cart
@@ -208,7 +208,7 @@ DELETE /api/v1/cart/items/{id}   # Remove item from cart
 DELETE /api/v1/cart              # Clear entire cart
 ```
 
-### Orders
+# Orders
 
 ```
 POST   /api/v1/orders            # Create order from cart
@@ -216,18 +216,18 @@ GET    /api/v1/orders            # List user orders
 GET    /api/v1/orders/{id}       # Get order details
 ```
 
-### Payments
+# Payments
 
 ```
 POST   /api/v1/payments/create-intent    # Create Stripe payment intent
 POST   /api/v1/payments/webhook          # Stripe webhook handler
 ```
 
-## Authentication
+ Authentication
 
 The API uses JWT Bearer tokens for authentication.
 
-1. **Register a user:**
+1. Register a user:
 
 ```bash
 curl -X POST http://localhost:8000/api/v1/auth/register \
@@ -239,7 +239,7 @@ curl -X POST http://localhost:8000/api/v1/auth/register \
   }'
 ```
 
-2. **Login to get tokens:**
+2. Login to get tokens:
 
 ```bash
 curl -X POST http://localhost:8000/api/v1/auth/login \
@@ -250,14 +250,14 @@ curl -X POST http://localhost:8000/api/v1/auth/login \
   }'
 ```
 
-3. **Use the access token in subsequent requests:**
+3. Use the access token in subsequent requests:
 
 ```bash
 curl -X GET http://localhost:8000/api/v1/auth/me \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
-## Testing
+ Testing
 
 Run the test suite:
 
@@ -275,27 +275,27 @@ Run with coverage:
 pytest --cov=app --cov-report=html
 ```
 
-## Database Migrations
+ Database Migrations
 
-### Create a new migration
+# Create a new migration
 
 ```bash
 alembic revision --autogenerate -m "description"
 ```
 
-### Apply migrations
+# Apply migrations
 
 ```bash
 alembic upgrade head
 ```
 
-### Rollback migrations
+# Rollback migrations
 
 ```bash
 alembic downgrade -1
 ```
 
-## Environment Variables
+ Environment Variables
 
 | Variable | Description | Default |
 |----------|-------------|---------|
@@ -310,9 +310,9 @@ alembic downgrade -1
 | `CELERY_BROKER_URL` | Celery broker URL | `redis://localhost:6379/1` |
 | `CELERY_RESULT_BACKEND` | Celery result backend | `redis://localhost:6379/2` |
 
-## Production Deployment
+ Production Deployment
 
-### Security Checklist
+# Security Checklist
 
 - [ ] Change `JWT_SECRET` to a strong random value
 - [ ] Use real Stripe API keys (not test keys)
@@ -325,18 +325,18 @@ alembic downgrade -1
 - [ ] Configure backups for PostgreSQL
 - [ ] Use Redis persistence (AOF/RDB)
 
-### Recommended Infrastructure
+# Recommended Infrastructure
 
-- **API:** Multiple instances behind a load balancer
-- **Database:** PostgreSQL with read replicas
-- **Cache:** Redis cluster or sentinel setup
-- **Queue:** Celery workers for background tasks
-- **Monitoring:** Prometheus + Grafana
-- **Logging:** ELK stack or similar
+- API: Multiple instances behind a load balancer
+- Database: PostgreSQL with read replicas
+- Cache: Redis cluster or sentinel setup
+- Queue: Celery workers for background tasks
+- Monitoring: Prometheus + Grafana
+- Logging: ELK stack or similar
 
-## Troubleshooting
+ Troubleshooting
 
-### Database connection errors
+# Database connection errors
 
 ```bash
 # Check if PostgreSQL is running
@@ -346,7 +346,7 @@ docker-compose ps postgres
 docker-compose logs postgres
 ```
 
-### Redis connection errors
+# Redis connection errors
 
 ```bash
 # Check if Redis is running
@@ -356,7 +356,7 @@ docker-compose ps redis
 docker-compose exec redis redis-cli ping
 ```
 
-### Migration errors
+# Migration errors
 
 ```bash
 # Reset database (WARNING: destroys all data)
@@ -365,7 +365,7 @@ docker-compose up -d postgres
 docker-compose exec api alembic upgrade head
 ```
 
-## Contributing
+ Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -373,10 +373,10 @@ docker-compose exec api alembic upgrade head
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## License
+ License
 
 This project is licensed under the MIT License.
 
-## Support
+ Support
 
 For issues and questions, please open an issue on GitHub.
